@@ -1,25 +1,109 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>AI Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>AI Dashboard</h1>
-        </header>
-        <main>
-            <section>
-                <h2>Optimization Status</h2>
-                <p id="optimization-status">Loading...</p>
-            </section>
-            <section>
-                <h2>Latest Results</h2>
-                <div id="latest-results">Loading...</div>
-            </section>
-        </main>
+{% extends 'base/master.html' %}
+
+{% block css %}
+<style>
+    /* Your existing CSS goes here */
+
+    /* Add some styles for the new elements */
+    .table-container {
+        margin-bottom: 20px;
+    }
+
+    .table-container table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table-container th,
+    .table-container td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+    }
+</style>
+{% endblock css %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Dashboard</h1>
+
+    <div class="table-container mt-3">
+        <div class="row mb-5">
+            <div class="col mt-5 mb-3">
+                <div class="card text-center text-dark mb-3" id="Website Created">
+                    <div class="card-header">Website Created</div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%"
+                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col offset-lg-1 mt-5">
+                <div class="card text-center text-dark mb-3" id="Website Optimized">
+                    <div class="card-header">Website Optimized</div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 10%"
+                            aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col mt-3">
+                    <div class="card text-center text-dark mb-3" id="Optimization Result">
+                        <div class="card-header">Optimization Result</div>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%"
+                                aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col offset-lg-1 mt-3">
+                    <div class="card text-center text-dark mb-3" id="Feedback">
+                        <div class="card-header">Feedback</div>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped bg-danger" role="progressbar"
+                                style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+
+
+                {% for item in websites %}
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h3 class="card-title">
+                                <i class="fas fa-link"></i>
+                                {{item.name}}
+                            </h3>
+                            <div class="card-text">
+                                <i class="fas fa-globe"></i>
+                                {{item.url}}
+                            </div>
+                            <div class="d-flex gap-2 justify-content-end ">
+                                <a class="btn btn-danger">
+                                    Delete
+                                </a>
+                                <a class="btn btn-primary">
+                                    optimized website content
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+
+                {% endfor %}
+
+            </div>
+        </div>
     </div>
-    <script src="{% static 'js/dashboard.js' %}"></script>
-</body>
-</html>
+</div>
+{% endblock content %}

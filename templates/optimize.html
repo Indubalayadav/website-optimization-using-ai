@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Optimize Website</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/optimize_website.css' %}">
-</head>
-<body>
+{% extend 'base/master.html' %}
+
+{% block content %}
     <div class="container">
         <header>
             <h1>Optimize Website</h1>
@@ -18,6 +14,5 @@
             </form>
         </main>
     </div>
-    <script src="{% static 'js/optimize_website.js' %}"></script>
-</body>
-</html>
+    
+    {% endblock content %}

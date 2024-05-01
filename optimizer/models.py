@@ -15,7 +15,8 @@ class Website(models.Model):
     from django.db import models
 
 class File(models.Model):
-    name = models.CharField(max_length=200)
+    file = models.FileField(upload_to='files/', blank=True, null=True)
+    size = models.IntegerField(default=0)
     file_type = models.CharField(max_length=200)
     website = models.ForeignKey(Website, on_delete=models.CASCADE)
 
@@ -61,4 +62,4 @@ class Report(models.Model):
 
     def __str__(self):
         return f'Report for {self.optimized_file.original_file.name} at {self.timestamp}'
-    
+
