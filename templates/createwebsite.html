@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Website</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/create_website.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Create Website</h1>
+        </header>
+        <main>
+            <form action="{% url 'create_website' %}" method="post">
+                {% csrf_token %}
+                <label for="website_name">Website Name:</label>
+                <input type="text" id="website_name" name="website_name" required>
+                <label for="website_url">Website URL:</label>
+                <input type="url" id="website_url" name="website_url" required>
+                <input type="submit" value="Create Website">
+            </form>
+        </main>
+    </div>
+    <script src="{% static 'js/create_website.js' %}"></script>
+</body>
+</html>

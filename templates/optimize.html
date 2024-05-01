@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Optimize Website</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/optimize_website.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Optimize Website</h1>
+        </header>
+        <main>
+            <h2>{{ website.name }}</h2>
+            <p>URL: <a href="{{ website.url }}">{{ website.url }}</a></p>
+            <form action="{% url 'optimize_website' website.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Start Optimization">
+            </form>
+        </main>
+    </div>
+    <script src="{% static 'js/optimize_website.js' %}"></script>
+</body>
+</html>

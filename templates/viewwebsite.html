@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Website</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/view_website.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>View Website</h1>
+        </header>
+        <main>
+            <h2>{{ website.name }}</h2>
+            <p>URL: <a href="{{ website.url }}">{{ website.url }}</a></p>
+            <p>Optimization Status: {{ website.optimization_status }}</p>
+            <p>Last Optimization Result: {{ website.last_optimization_result }}</p>
+        </main>
+    </div>
+    <script src="{% static 'js/view_website.js' %}"></script>
+</body>
+</html>

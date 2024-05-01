@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI Dashboard</h1>
+        </header>
+        <main>
+            <section>
+                <h2>Optimization Status</h2>
+                <p id="optimization-status">Loading...</p>
+            </section>
+            <section>
+                <h2>Latest Results</h2>
+                <div id="latest-results">Loading...</div>
+            </section>
+        </main>
+    </div>
+    <script src="{% static 'js/dashboard.js' %}"></script>
+</body>
+</html>
