@@ -2,17 +2,17 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Website, File, OptimizedFile, Log, Feedback, Report
+from .forms import *
 
-def createwebsite(request):
+def Addwebsite(request):
+    form = WebsiteForm()
     if request.method == 'POST':
-        name = request.POST.get('name')
-        url = request.POST.get('url')
-        website = Website(name=name, url=url)
-        website.save()
-        messages.success(request, 'Website created successfully!')
+        form = WebsiteForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+        messages.success(request, 'Website added successfully!')
         return redirect('dashboard')
-    else:
-        return render(request, 'createwebsite.html')
+    return render(request, 'addwebsite.html', {'form': form})
 
 
 def viewwebsite(request, id):
@@ -23,7 +23,8 @@ def dashboard(request):
     websites = Website.objects.all()
     return render(request, 'dashboard.html', {'websites': websites})
 
-def optimize(request, id):
+def optimized(request, id):
+
     website = Website.objects.get(id=id)
     # files = File.objects.filter(website=website)
     # optimized_files = []
@@ -31,10 +32,13 @@ def optimize(request, id):
     #     optimized_file = OptimizedFile(file=file, optimization_result='Success')
     #     optimized_file.save()
     #     optimized_files.append(optimized_file)
-    # return render(request, 'optimize.html', {'website': website, 'optimized_files': optimized_files})
+    # return render(request, 'optimized.html', {'website': website, 'optimized_files': optimized_files})
     messages.success(request, 'Website optimized successfully!')
-    return redirect('dashboard')
+    return render(request, 'optimize.html', {'website': website})
 
+def optimize(request):
+    websites = Website.objects.all() #replace with your actual query
+    return render(request, 'optimize.html', {'websites': websites})
 
 def feedback(request):
     if request.method == 'POST':
@@ -68,3 +72,9 @@ def delete_website(request, id):
     website.delete()
     messages.success(request, 'Website deleted successfully!')
     return redirect('dashboard')
+
+
+def add_website(request):
+    # Code to add website...
+
+    return redirect('optimized?success=true')

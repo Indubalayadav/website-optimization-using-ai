@@ -5,7 +5,7 @@ from django.db import models
 
 class Website(models.Model):
     name = models.CharField(max_length=200)
-    url = models.URLField(max_length=200)
+    zip_file = models.FileField(upload_to='zip_files/', blank=True, null=True)
     optimization_status = models.CharField(max_length=200, default='Not started')
     last_optimization_result = models.TextField(blank=True)
 

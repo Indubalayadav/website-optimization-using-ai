@@ -4,12 +4,12 @@ from .models import Website, File, OptimizedFile, Log, Feedback, Report
 class WebsiteForm(forms.ModelForm):
     class Meta:
         model = Website
-        fields = ['name', 'url']
+        fields = ['name', 'zip_file']
 
 class FileForm(forms.ModelForm):
     class Meta:
         model = File
-        fields = ['name', 'file_type', 'website']
+        fields = ['file', 'size', 'file_type', 'website']
 
 class OptimizedFileForm(forms.ModelForm):
     class Meta:

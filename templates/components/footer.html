@@ -4,8 +4,8 @@
     <div class="container footer-top">
       <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-about">
-          <a href="index.html" class="logo d-flex align-items-center">
-            <span>Webto</span>
+          <a href="{% url 'about' %}" class="logo d-flex align-items-center">
+            <span> About US </span>
           </a>
           <p>Want an creative website for you? Here your seacrh stops. We provide Website optimization using Ai-algorithms. </p>
           <div class="social-links d-flex mt-4">
@@ -19,11 +19,9 @@
         <div class="col-lg-2 col-6 footer-links">
           <h4>Useful Links</h4>
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="#">Services</a></li>
-            <li><a href="#">Terms of service</a></li>
-            <li><a href="#">Privacy policy</a></li>
           </ul>
         </div>
 
@@ -41,7 +39,6 @@
 
         <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
           <h4>Contact Us</h4>
-          <p>WorldWide</p>
           <p class="mt-4"><strong>Phone:</strong> <span>+91 8536487587</span></p>
           <p><strong>Email:</strong> <span>kashyap@gmail.com</span></p>
         </div>
