@@ -23,33 +23,47 @@ def dashboard(request):
     websites = Website.objects.all()
     return render(request, 'dashboard.html', {'websites': websites})
 
+import zipfile
+import os
+import shutil
 def optimized(request, id):
 
     website = Website.objects.get(id=id)
-    # files = File.objects.filter(website=website)
-    # optimized_files = []
-    # for file in files:
-    #     optimized_file = OptimizedFile(file=file, optimization_result='Success')
-    #     optimized_file.save()
-    #     optimized_files.append(optimized_file)
-    # return render(request, 'optimized.html', {'website': website, 'optimized_files': optimized_files})
-    messages.success(request, 'Website optimized successfully!')
-    return render(request, 'optimize.html', {'website': website})
+    website.optimization_status = 'In progress'
+    website.save()
+    # unzip the zip file
+    zip_file = zipfile.ZipFile(website.zip_file.path, 'r')
+    zip_file.extractall(f'media/{website.name}')
+    zip_file.close()
+    # get all files in the unzipped folder
+    for root, folder, files in os.walk(f'media/{website.name}'):
+        for file in files:
+            try:
+                file_path = os.path.join(root, file)
+                file_size = os.path.getsize(file_path)
+                file_type = file_path.split('.')[-1]
+                website_file = File(file=file_path, size=file_size, file_type=file_type, website=website)
+                website_file.save()
+            except Exception as e:
+                print(e)
 
-def optimize(request):
-    websites = Website.objects.all() #replace with your actual query
-    return render(request, 'optimize.html', {'websites': websites})
+    # unzip files store them in files table
+    website_files = File.objects.filter(website=website)
+    messages.success(request, 'All files extracted')
+    return render(request, 'optimized.html', {'website': website, 'files': website_files})
 
-def feedback(request):
+
+
+def Feedback_view(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
         message = request.POST.get('message')
-        feedback = Feedback(name=name, email=email, message=message)
-        feedback.save()
-        return render(request, 'feedback.html', {'message': 'Feedback sent successfully!'})
+        Feedback = Feedback(name=name, email=email, message=message)
+        Feedback.save()
+        return render(request, 'Feedback.html', {'message': 'Feedback sent successfully!'})
     else:
-        return render(request, 'feedback.html')
+        return render(request, 'Feedback.html')
     
 def report(request):
     reports = Report.objects.all()
@@ -78,3 +92,25 @@ def add_website(request):
     # Code to add website...
 
     return redirect('optimized?success=true')
+
+def contact_view(request):
+    if request.method == 'POST':
+        try:
+            name = request.POST.get('name')
+            number = request.POST.get('number')
+            email = request.POST.get('email')
+            subject = request.POST.get('subject')
+            message = request.POST.get('message')
+            contact = contact(name=name,number=number, email=email, subject=subject, message=message)
+            contact.save()
+            messages.success(request, 'Message sent')
+            return redirect('home')
+        except:
+            messages.error(request, 'Error sending message')
+    return render(request, 'contact.html')
+
+def download_files(request):
+    # Replace 'path_to_file' with the actual path to the file you want to download
+    path_to_file = '/path'
+    FileResponse = FileResponse(open(path_to_file, 'rb'))
+    return FileResponse

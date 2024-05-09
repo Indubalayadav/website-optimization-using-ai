@@ -19,20 +19,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body {
-            background: url('{% static "img/login15.jpg" %}') no-repeat center center fixed;
+            background: url('{% static "img/blurr.jpeg" %}') no-repeat center center fixed;
             -webkit-background-size: cover; 
             -moz-background-size: cover;
             -o-background-size: cover;
             background-size: cover;
+            
         }
 
         .card {
             opacity: 0.9;
-            background-color: rgba(0, 0, 0, 0.5); /* Transparent white */
+            background-color: rgba(0, 0, 0,0); /* Transparent white */
         }
         .btn {
           width: 25%;
   }
+  input#username, input#password {
+    background-color: rgba(255, 255, 255, 0.5); /* Fully transparent */
+}
 
     </style>
 </head>
@@ -43,7 +47,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-5 mt-5">
                 <div class="card shadow-lg border-0 rounded-lg mt-5 animate_animated animate_fadeIn">
-                    <div class="card-header"><h3 class="text-center text-white font-weight-light my-4">Login</h3></div>
+                    <div class="card-header"><h1 class="text-center text-dark font-weight-light my-4">Login</h1></div>
                     <div class="card-body mt-2">
                             <form method="post" action="{% url 'login' %}">
                                 {% csrf_token %}
@@ -64,10 +68,9 @@
                                     <input type="password" class="form-control" id="password" name="password" required>
                                 </div>
                                 <div class="form-group mt-3">
-                                    <input type="submit" class="btn btn-primary mt-3" value="Login">
+                                    <input type="submit" class="btn btn-danger mt-3" value="Login">
                                <div class="text-center mt-3 mb-4">
-                        <div class="small"><a href="{% url 'register' %}" class="
-                            text-white">Need an account? Register!</a></div>
+                        <div class="small"><a href="{% url 'register' %}" class="text-danger"><h6>Need an account? Register!</h6></a></div>
                     </div>
                 </div>
             </form>

@@ -12,5 +12,10 @@ urlpatterns = [
     path('optimize/<int:id>', views.optimized, name='optimized'),
     # delete website
     path('delete/<int:id>', views.delete_website, name='delete_website'),
-    
+    # contact
+    path('contact', views.contact_view, name='contact'),
+    # download files
+    path('download_files/', views.download_files, name='download_files'),
+    # Feedback
+    path('Feedback', views.Feedback_view, name='Feedback'),
  ]
